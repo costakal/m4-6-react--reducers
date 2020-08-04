@@ -30,6 +30,10 @@ export const SeatProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const receiveSeatInfoFromServer = (data) => {
+    const bookedSeatsArray = Object.keys(data.bookedSeats);
+    bookedSeatsArray.forEach((seat) => {
+      data.seats[seat].isBooked = true;
+    });
     dispatch({ type: "RECEIVE-SEAT-INFO-FROM-SERVER", ...data });
   };
 

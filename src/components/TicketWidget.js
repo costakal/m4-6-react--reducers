@@ -31,7 +31,7 @@ const TicketWidget = () => {
 
               return (
                 <SeatWrapper key={seatId}>
-                  <Seat />
+                  <Seat state={state} seatId={seatId} />
                 </SeatWrapper>
               );
             })}
