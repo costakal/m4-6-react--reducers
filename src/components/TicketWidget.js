@@ -12,8 +12,11 @@ const TicketWidget = () => {
   const numOfRows = state.numOfRows;
   const seatsPerRow = state.seatsPerRow;
 
-  // TODO: implement the loading spinner <CircularProgress />
-  // with the hasLoaded flag
+  console.log(state);
+
+  if (state.hasLoaded === false) {
+    return <CircularProgress />;
+  }
 
   return (
     <Wrapper>
