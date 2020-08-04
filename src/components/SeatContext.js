@@ -9,7 +9,19 @@ const initialState = {
   seatsPerRow: 0,
 };
 
-const reducer = (state, action) => {};
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "RECEIVE-SEAT-INFO-FROM-SERVER": {
+      return {
+        ...state,
+        seats: action.seats,
+        numOfRows: action.numOfRows,
+        seatsPerRow: action.seatsPerRow,
+        hasLoaded: true,
+      };
+    }
+  }
+};
 
 export const SeatProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
