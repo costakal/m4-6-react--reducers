@@ -31,6 +31,7 @@ const TicketWidget = () => {
 
               return (
                 <Tippy
+                  key={`tippy-${seatId}`}
                   content={
                     <span>
                       Row {rowName}, Seat {seatIndex} -$
@@ -39,7 +40,16 @@ const TicketWidget = () => {
                   }
                 >
                   <SeatWrapper key={seatId}>
-                    <Seat state={state} seatId={seatId} />
+                    <Seat
+                      state={state}
+                      seatId={seatId}
+                      rowIndex={rowIndex}
+                      seatIndex={seatIndex}
+                      width={36}
+                      height={36}
+                      price={state.seats[seatId].price}
+                      status={state.seats[seatId].isBooked ? true : false}
+                    />
                   </SeatWrapper>
                 </Tippy>
               );

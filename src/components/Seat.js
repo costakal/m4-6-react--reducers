@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import seat from "../assets/seat-available.svg";
+import { BookingContext } from "./BookingContext";
 
-const Seat = ({ state, seatId }) => {
+const Seat = ({
+  state,
+  seatId,
+  rowIndex,
+  seatIndex,
+  width,
+  height,
+  price,
+  status,
+}) => {
+  const {
+    actions: { handleBookingProcess },
+  } = useContext(BookingContext);
   if (state.seats[seatId].isBooked === true) {
     return (
-      <img
-        alt="available seat"
-        src={seat}
-        style={{ filter: "grayscale(100%)" }}
-      />
+      <button disabled={status}>
+        <img
+          alt="unavailable seat"
+          src={seat}
+          style={{ filter: "grayscale(100%)" }}
+        />
+      </button>
     );
   } else {
-    return <img alt="available seat" src={seat} />;
+    return (
+      <button
+        onClick={() => {
+          console.log("clicked");
+          handleBookingProcess(rowIndex, seatIndex, price);
+        }}
+        disabled={status}
+      >
+        <img alt="available seat" src={seat} />
+      </button>
+    );
   }
 };
 
