@@ -3,7 +3,6 @@ import React from "react";
 import seat from "../assets/seat-available.svg";
 
 const Seat = ({ state, seatId }) => {
-  console.log(seatId);
   if (state.seats[seatId].isBooked === true) {
     return (
       <img

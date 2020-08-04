@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
 import { getRowName, getSeatNum } from "../helpers";
 import { range } from "../utils";
@@ -11,8 +13,6 @@ const TicketWidget = () => {
   const { state } = useContext(SeatContext);
   const numOfRows = state.numOfRows;
   const seatsPerRow = state.seatsPerRow;
-
-  console.log(state);
 
   if (state.hasLoaded === false) {
     return <CircularProgress />;
@@ -30,9 +30,18 @@ const TicketWidget = () => {
               const seatId = `${rowName}-${getSeatNum(seatIndex)}`;
 
               return (
-                <SeatWrapper key={seatId}>
-                  <Seat state={state} seatId={seatId} />
-                </SeatWrapper>
+                <Tippy
+                  content={
+                    <span>
+                      Row {rowName}, Seat {seatIndex} -$
+                      {state.seats[seatId].price}
+                    </span>
+                  }
+                >
+                  <SeatWrapper key={seatId}>
+                    <Seat state={state} seatId={seatId} />
+                  </SeatWrapper>
+                </Tippy>
               );
             })}
           </Row>
